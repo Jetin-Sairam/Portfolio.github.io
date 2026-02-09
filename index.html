@@ -13,6 +13,14 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        body{
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
         
         body {
             background: #0a0a0a;
@@ -1692,7 +1700,7 @@
             <button class="reset-button" onclick="resetGame()">New Game</button>
 
             <div class="win-message" id="winMessage">
-                <h3>🎉 You Win! 🎉</h3>
+                <h3>🎉 You Win!</h3>
                 <p>Completed in <span id="finalMoves"></span> moves</p>
                 <p>Time: <span id="finalTime"></span></p>
             </div>
