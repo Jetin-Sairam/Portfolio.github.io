@@ -13,12 +13,32 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* Custom scrollbar */
+        body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: rgba(220, 20, 20, 0.3);
+            border-radius: 3px;
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: rgba(220, 20, 20, 0.5);
+        }
+
         body {
             background: #0a0a0a;
             color: #fff;
             font-family: 'Chakra Petch', sans-serif;
             overflow-x: hidden;
         }
+        
         
         /* Jack of Diamonds Card Background Pattern */
         .bg-pattern {
@@ -1837,6 +1857,46 @@
                 setTimeout(checkMatch, 600);
             }
         }
+
+        // Smooth scrolling for navigation links
+        // Scroll to top on page load
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
+        // Scroll to top before page unload
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
+
+        // Force scroll to top on page show (handles back/forward navigation)
+        window.addEventListener('pageshow', () => {
+            window.scrollTo(0, 0);
+        });
+
+        // Scroll to top when switching between tabs
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                navLinks.forEach(l => l.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
+
+                // Add active class to clicked link
+                link.classList.add('active');
+
+                // Show corresponding section
+                const pageId = link.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+
+                // Close mobile menu if open
+                document.getElementById('navLinks').classList.remove('active');
+
+                // Scroll to top of the page
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
 
         function checkMatch() {
             const [id1, id2] = flippedCards;
